@@ -42,7 +42,7 @@ printf "Please enter the delay (min) for stopping the server [5]:\n"
 read delay
 delay=${delay:-5}
 
-while ! [[ "$delay" =~ ^[1-9][0-9]{0,1}$|^100$ ]]
+while ! [[ "$delay" =~ ^[1-9][0-9]{0,1}$|^100$|^0$ ]]
 do
 	echo "Integers between 0 and 100 only"
 	read delay
