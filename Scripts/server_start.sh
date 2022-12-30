@@ -14,7 +14,7 @@ then
 fi
 
 # Check if the server is already running
-if pgrep -f minecraft &> /dev/null 2>&1;
+if pgrep -f $jar_file &> /dev/null 2>&1;
 then
 	printf "It seems a server is already running.\n"
 
@@ -31,6 +31,6 @@ else
 	then
 		tmux new -s $tmux_session -d
 	fi
-	tmux send-keys -t $tmux_session "clear && cd ${server_path} && java -Xmx${mem_max}M -Xms${mem_min}M -jar minecraft_server.1.19.3.jar nogui" Enter
+	tmux send-keys -t $tmux_session "clear && cd ${server_path} && java -Xmx${mem_max}M -Xms${mem_min}M -jar ${jar_file} nogui" Enter
 	tmux attach-session -t $tmux_session
 fi
