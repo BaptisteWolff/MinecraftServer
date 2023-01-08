@@ -21,6 +21,7 @@ function assert_server_running(){
 }
 
 function assert_tmux_session_exists(){
+	tmux has-session -t $tmux_session 2>/dev/null
 	if [ $? != 0 ];
 	then
 	  	printf "${COLOR_RED}The TMUX session ${tmux_session} was not found.\nUnnable to continue.${COLOR_RESET}\n"
