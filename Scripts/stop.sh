@@ -20,6 +20,14 @@ function assert_server_running(){
 	fi
 }
 
+function assert_server_not_running(){
+	if pgrep -f $jar_file &> /dev/null 2>&1;
+	then
+		printf "${COLOR_RED}The server is running !${COLOR_RESET}\n"
+		exit 1
+	fi
+}
+
 function assert_tmux_session_exists(){
 	tmux has-session -t $tmux_session 2>/dev/null
 	if [ $? != 0 ];
@@ -63,7 +71,6 @@ for((i=$delay;i>0;--i)) do
 	sleep 1m
 done
 
-
 # Stop the server
 send_keys "/stop"
 
@@ -73,3 +80,14 @@ close_tmux_session &
 # Attach to already created session to monitor the progression
 assert_tmux_session_exists
 tmux attach-session -t $tmux_session
+
+# Check server not running
+assert_server_not_running
+
+# Create backup
+today=$(date +"%Y-%m-%d")
+zip -r ${backup_path}${level_name}_${today}.zip ${server_path}${level_name}/
+
+# Delete old backup
+deleteday=$(date -d '30 days ago' +'%Y-%m-%d')
+rm -f "${backup_path}${level_name}_${deleteday}.zip"
