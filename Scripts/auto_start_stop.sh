@@ -49,4 +49,4 @@ deleteday=$(date -d '30 days ago' +'%Y-%m-%d')
 rm -f "${backup_path}${level_name}_${deleteday}.zip"
 
 # Schedule sleep and restart server
-sudo rtcwake -m mem -t $(date +%s -d '07:59') && bash server_start.sh
+sudo rtcwake -m mem -t $(date +%s -d '07:59') && bash start.sh
