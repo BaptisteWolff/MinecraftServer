@@ -1,1 +1,4 @@
+MAILTO=""
+TERM=xterm
+
 40 3 * * * root cd /home/baptiste/Minecraft/Scripts/ && bash auto_start_stop.sh >> /home/baptiste/Minecraft/Logs/cron/auto_start_stop.log 2>&1
