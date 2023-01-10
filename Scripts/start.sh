@@ -23,7 +23,7 @@ then
 	  	printf "${COLOR_RED}The TMUX session ${tmux_session} was not found.${COLOR_RESET}\n"
 	else
 		# Attach to already created session
-		tmux attach-session -t $tmux_session
+		# tmux attach-session -t $tmux_session
 	fi
 else
 	# Start or attach to the session and start the server
@@ -31,6 +31,7 @@ else
 	then
 		tmux new -s $tmux_session -d
 	fi
-	tmux send-keys -t $tmux_session "clear && cd ${server_path} && java -Xmx${mem_max}M -Xms${mem_min}M -jar ${jar_file} nogui" Enter
-	tmux attach-session -t $tmux_session
+	# Loop while with "&& break" -> will restart if exit 1 (crash), stop gracefully if exit code 0
+	tmux send-keys -t $tmux_session "clear && cd ${server_path} && while true; do java -Xmx${mem_max}M -Xms${mem_min}M -jar ${jar_file} nogui && break; done" Enter
+	# tmux attach-session -t $tmux_session
 fi

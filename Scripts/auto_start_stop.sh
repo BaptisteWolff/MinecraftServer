@@ -35,7 +35,7 @@ assert_server_running
 assert_tmux_session_exists
 
 # Stops the server
-echo "10" | bash server_stop.sh
+echo "10" | bash stop.sh
 
 # Check server not running
 assert_server_not_running
