@@ -1,5 +1,10 @@
 #!/bin/bash
 
+echo '';
+echo '===================';
+echo `date +%d/%m/%Y\ %H:%M:%S`;
+echo '===================';
+
 tmux_session="Minecraft"
 base_path="/home/baptiste/Minecraft/"
 server_path="${base_path}Server/"
