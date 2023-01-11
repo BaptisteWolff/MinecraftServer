@@ -81,17 +81,17 @@ send_keys "/stop"
 #assert_tmux_session_exists
 #tmux attach-session -t $tmux_session
 
-echo 'Stopping the server'
+echo 'Stopping the server ...'
 close_tmux_session
 
 # Check server not running
 assert_server_not_running
 
 # Create backup and delete old backup
-echo 'Création du backup'
+echo 'Creating backup ...'
 today=$(date +"%Y-%m-%d")
 deleteday=$(date -d '10 days ago' +'%Y-%m-%d')
-zip -q -r ${backup_path}${level_name}_${today}.zip ${server_path}${level_name}/ && (echo "Backup créée" && rm -f "${backup_path}${level_name}_${deleteday}.zip") || echo "Erreur lors de la création du backup"
+zip -q -r ${backup_path}${level_name}_${today}.zip ${server_path}${level_name}/ && (echo "Backup created." && rm -f "${backup_path}${level_name}_${deleteday}.zip") || printf "${COLOR_RED}Error when creating backup.${COLOR_RESET}\n"
 
 # Delete old backup
 #deleteday=$(date -d '10 days ago' +'%Y-%m-%d')
