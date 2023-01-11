@@ -9,7 +9,7 @@ function close_tmux_session(){
 	do
 		sleep 1;
 	done
-	tmux send-keys -t $tmux_session "logout" Enter
+	# tmux send-keys -t $tmux_session "logout" Enter
 }
 
 function assert_server_running(){
@@ -75,19 +75,24 @@ done
 send_keys "/stop"
 
 # Wait for the server to stop in the backgroud before closing the tmux session
-close_tmux_session &
+#close_tmux_session &
 
 # Attach to already created session to monitor the progression
-assert_tmux_session_exists
-tmux attach-session -t $tmux_session
+#assert_tmux_session_exists
+#tmux attach-session -t $tmux_session
+
+echo 'Stopping the server'
+close_tmux_session
 
 # Check server not running
 assert_server_not_running
 
-# Create backup
+# Create backup and delete old backup
+echo 'Création du backup'
 today=$(date +"%Y-%m-%d")
-zip -r ${backup_path}${level_name}_${today}.zip ${server_path}${level_name}/
+deleteday=$(date -d '10 days ago' +'%Y-%m-%d')
+zip -q -r ${backup_path}${level_name}_${today}.zip ${server_path}${level_name}/ && (echo "Backup créée" && rm -f "${backup_path}${level_name}_${deleteday}.zip") || echo "Erreur lors de la création du backup"
 
 # Delete old backup
-deleteday=$(date -d '30 days ago' +'%Y-%m-%d')
-rm -f "${backup_path}${level_name}_${deleteday}.zip"
+#deleteday=$(date -d '10 days ago' +'%Y-%m-%d')
+#rm -f "${backup_path}${level_name}_${deleteday}.zip"
