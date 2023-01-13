@@ -64,7 +64,7 @@ for((i=$delay;i>0;--i)) do
 	if [ "$i" = "$delay" ] || [ "$i" = 60 ] || [ "$i" = 30 ] || [ "$i" = 10 ] || [ "$i" = 5 ] || [ "$i" = 1 ];
 	then
 		echo "Server closes in ${i} min."
-		send_keys "/msg @a Le server s'arrêtera dans ${i} min."
+		send_keys "msg @a Le server s'arrêtera dans ${i} min."
 	else
 		assert_tmux_session_exists
 	fi
@@ -72,7 +72,7 @@ for((i=$delay;i>0;--i)) do
 done
 
 # Stop the server
-send_keys "/stop"
+send_keys "stop"
 
 # Wait for the server to stop in the backgroud before closing the tmux session
 #close_tmux_session &
