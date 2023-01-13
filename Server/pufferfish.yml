@@ -12,8 +12,8 @@ projectile:
   max-loads-per-tick: 10
   # Controls how many chunks a projectile
   # can load in its lifetime before it gets
-  # automatically removed. (10)
-  max-loads-per-projectile: 8
+  # automatically removed.
+  max-loads-per-projectile: 10
 # These values define a entity's maximum lifespan. If an
 # entity is in this list and it has survived for longer than
 # that number of ticks, then it will be removed. Setting a value to

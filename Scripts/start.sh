@@ -33,7 +33,7 @@ else
 		tmux new -s $tmux_session -d
 	fi
 	# Loop while with "&& break" -> will restart if exit 1 (crash), stop gracefully if exit code 0
-	tmux send-keys -t $tmux_session "clear && cd ${server_path} && while true; do java -Xmx${mem_max}M -Xms${mem_min}M -jar ${jar_file} nogui && break; done" Enter
+	tmux send-keys -t $tmux_session "clear && cd ${server_path} && while true; do java -Xmx${mem_max}M -Xms${mem_min}M --add-modules=jdk.incubator.vector -jar ${jar_file} nogui && break; done" Enter
 	# tmux attach-session -t $tmux_session
 	printf "Server starting on the TMUX session ${tmux_session}.\n"
 fi
