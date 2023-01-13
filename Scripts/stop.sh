@@ -91,7 +91,8 @@ assert_server_not_running
 echo 'Creating backup ...'
 today=$(date +"%Y-%m-%d")
 deleteday=$(date -d '10 days ago' +'%Y-%m-%d')
-zip -q -r ${backup_path}${level_name}_${today}.zip ${server_path}${level_name}/ && (echo "Backup created." && rm -f "${backup_path}${level_name}_${deleteday}.zip") || printf "${COLOR_RED}Error when creating backup.${COLOR_RESET}\n"
+cd ${server_path}
+zip -q -r ${backup_path}${level_name}_${today}.zip ${level_name}/ && (echo "Backup created." && rm -f "${backup_path}${level_name}_${deleteday}.zip") || printf "${COLOR_RED}Error when creating backup.${COLOR_RESET}\n"
 
 # Delete old backup
 #deleteday=$(date -d '10 days ago' +'%Y-%m-%d')
