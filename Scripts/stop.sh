@@ -90,10 +90,15 @@ assert_server_not_running
 # Create backup and delete old backup
 echo 'Creating backup ...'
 today=$(date +"%Y-%m-%d")
-deleteday=$(date -d '10 days ago' +'%Y-%m-%d')
 cd ${server_path}
-zip -q -r ${backup_path}${level_name}_${today}.zip ${level_name}/ ${level_name}_nether/ ${level_name}_the_end/ && (echo "Backup created." && rm -f "${backup_path}${level_name}_${deleteday}.zip") || printf "${COLOR_RED}Error when creating backup.${COLOR_RESET}\n"
+zip -q -r ${backup_path}${level_name}_${today}.zip ${level_name}/ ${level_name}_nether/ ${level_name}_the_end/ || (printf "${COLOR_RED}Error when creating backup.${COLOR_RESET}\n" && exit 1)
+echo "Backup created."
 
 # Delete old backup
-#deleteday=$(date -d '10 days ago' +'%Y-%m-%d')
-#rm -f "${backup_path}${level_name}_${deleteday}.zip"
+echo 'Deleting old backup ...'
+deleteday=$(date -d '10 days ago' +'%Y-%m-%d')
+rm -f "${backup_path}${level_name}_${deleteday}.zip")
+
+# Send backup to gdrive
+echo 'Sending backup to gdrive ...'
+rclone copyto ${backup_path}${level_name}_${today}.zip gdrive:Minecraft/Basile.zip
