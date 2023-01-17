@@ -102,3 +102,7 @@ rm -f "${backup_path}${level_name}_${deleteday}.zip")
 # Send backup to gdrive
 echo 'Sending backup to gdrive ...'
 rclone copyto ${backup_path}${level_name}_${today}.zip gdrive:Minecraft/${level_name}.zip
+
+echo '';
+echo `date +%d/%m/%Y\ %H:%M:%S`;
+echo 'End';
