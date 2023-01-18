@@ -97,7 +97,7 @@ echo "Backup created."
 # Delete old backup
 echo 'Deleting old backup ...'
 deleteday=$(date -d '10 days ago' +'%Y-%m-%d')
-rm -f "${backup_path}${level_name}_${deleteday}.zip")
+rm -f "${backup_path}${level_name}_${deleteday}.zip"
 
 # Send backup to gdrive
 echo 'Sending backup to gdrive ...'
