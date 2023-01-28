@@ -16,4 +16,4 @@ function assert_server_not_running(){
 assert_server_not_running
 
 # Schedule sleep until 07:55
-rtcwake -m mem -t $(date +%s -d '07:55')
+rtcwake -m mem -t $(date +%s -d '07:50') && reboot
